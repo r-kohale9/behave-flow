@@ -5,7 +5,7 @@ import rawSpecJson from "behave-graph/dist/node-spec.json";
 import { NodeSpecJSON } from "behave-graph";
 import { newNode } from "../util/getNodeSpecJSON";
 
-const specJSON = [] as NodeSpecJSON[];
+const specJSON = rawSpecJson as NodeSpecJSON[];
 
 const nodes = specJSON;
 

@@ -95,6 +95,50 @@ export const newNode: NodeSpecJSON[] = [
     ]
   },
   {
+    type: 'on_click',
+    category: 'Action',
+    label: 'on Click',
+    inputs: [
+      {
+        name: 'frame_id',
+        valueType: 'flow',
+        defaultValue: ''
+      }
+    ],
+    outputs: [
+      {
+        name: 'result',
+        valueType: 'flow'
+      }
+    ]
+  },
+  {
+    type: 'toggle_value',
+    category: 'Action',
+    label: 'toggle value',
+    inputs: [
+      {
+        name: 'input',
+        valueType: 'flow',
+        defaultValue: ''
+      },
+      {
+        name: 'variables',
+        valueType: 'string'
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'string'
+      }
+    ]
+  },
+  {
     type: 'variable',
     category: 'Variable',
     label: 'Variable',
@@ -108,7 +152,7 @@ export const newNode: NodeSpecJSON[] = [
     outputs: [
       {
         name: 'result',
-        valueType: 'flow'
+        valueType: 'string'
       }
     ]
   },
@@ -126,7 +170,7 @@ export const newNode: NodeSpecJSON[] = [
     outputs: [
       {
         name: 'result',
-        valueType: 'fame'
+        valueType: 'flow'
       }
     ]
   },
