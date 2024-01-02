@@ -3,8 +3,9 @@ import { useReactFlow, XYPosition } from "reactflow";
 import { useOnPressKey } from "../hooks/useOnPressKey";
 import rawSpecJson from "behave-graph/dist/node-spec.json";
 import { NodeSpecJSON } from "behave-graph";
+import { newNode } from "../util/getNodeSpecJSON";
 
-const specJSON = rawSpecJson as NodeSpecJSON[];
+const specJSON = [] as NodeSpecJSON[];
 
 const nodes = specJSON;
 
@@ -44,7 +45,7 @@ const NodePicker = ({
     const term = search.toLowerCase();
     return node.type.toLowerCase().includes(term);
   });
-
+  filtered.push(...newNode)
   return (
     <div
       className="node-picker absolute z-10 text-sm text-white bg-gray-800 border rounded border-gray-500"
