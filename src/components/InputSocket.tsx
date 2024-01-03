@@ -44,7 +44,7 @@ export default function InputSocket({
             <AutoSizeInput
               type="text"
               className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
-              value={String(value) ?? defaultValue ?? ""}
+              value={String(value) ?? String(defaultValue ) ?? ""}
               onChange={(e) => onChange(name, e.currentTarget.value)}
             />
           )}
@@ -60,7 +60,7 @@ export default function InputSocket({
             <AutoSizeInput
               type="number"
               className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
-              value={String(value) ?? defaultValue ?? ""}
+              value={String(value) ?? String(defaultValue ) ?? ""}
               onChange={(e) => onChange(name, e.currentTarget.value)}
             />
           )}
@@ -68,7 +68,7 @@ export default function InputSocket({
             <AutoSizeInput
               type="number"
               className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
-              value={String(value) ?? defaultValue ?? ""}
+              value={String(value) ?? String(defaultValue ) ?? ""}
               onChange={(e) => onChange(name, e.currentTarget.value)}
             />
           )}
@@ -76,7 +76,7 @@ export default function InputSocket({
             <AutoSizeInput
               type="number"
               className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
-              value={String(value) ?? defaultValue ?? ""}
+              value={String(value) ?? String(defaultValue ) ?? ""}
               onChange={(e) => onChange(name, e.currentTarget.value)}
             />
           )}
@@ -84,7 +84,7 @@ export default function InputSocket({
             <input
               type="checkbox"
               className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
-              value={String(value) ?? defaultValue ?? ""}
+              value={String(value) ?? String(defaultValue ) ?? ""}
               onChange={(e) => onChange(name, e.currentTarget.checked)}
             />
           )}
