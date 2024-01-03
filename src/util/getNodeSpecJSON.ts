@@ -8,7 +8,6 @@ export const getNodeSpecJSON = (): NodeSpecJSON[] => {
     registerCoreProfile(registry);
     registerSceneProfile(registry);
     nodeSpecJSON = writeNodeSpecsToJSON(registry);
-    console.log(nodeSpecJSON);
   }
   nodeSpecJSON.push(...newNode);
   return nodeSpecJSON;
@@ -17,24 +16,24 @@ export const getNodeSpecJSON = (): NodeSpecJSON[] => {
 export const newNode: NodeSpecJSON[] = [
   {
     type: 'publish_event',
-    category: 'Event',
+    category: 'Action',
     label: 'Publish event',
     inputs: [
       {
-        name: 'name',
-        valueType: 'string',
+        name: ' ',
+        valueType: 'flow',
         defaultValue: ''
       },
       {
-        name: 'last event',
-        valueType: 'event',
+        name: 'name',
+        valueType: 'string',
         defaultValue: ''
       }
     ],
     outputs: [
       {
-        name: 'result',
-        valueType: 'event'
+        name: ' ',
+        valueType: 'flow'
       }
     ]
   },
@@ -72,37 +71,68 @@ export const newNode: NodeSpecJSON[] = [
     ]
   },
   {
-    type: 'interaction',
-    category: 'Action',
-    label: 'Interaction',
+    type: 'on_click',
+    category: 'Event',
+    label: 'on Click',
     inputs: [
       {
-        name: 'name',
+        name: 'frame_id',
         valueType: 'string',
-        defaultValue: ''
-      },
-      {
-        name: 'type',
-        valueType: 'string',
-        defaultValue: ''
+        defaultValue: ' '
       }
     ],
     outputs: [
       {
         name: 'result',
-        valueType: 'event'
+        valueType: 'flow'
       }
     ]
   },
   {
-    type: 'on_click',
-    category: 'Action',
-    label: 'on Click',
+    type: 'on_drag',
+    category: 'Event',
+    label: 'on Drag',
     inputs: [
       {
         name: 'frame_id',
-        valueType: 'flow',
-        defaultValue: ''
+        valueType: 'string',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: 'result',
+        valueType: 'flow'
+      }
+    ]
+  },
+  {
+    type: 'on_drag_start',
+    category: 'Event',
+    label: 'on Drag Start',
+    inputs: [
+      {
+        name: 'frame_id',
+        valueType: 'string',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: 'result',
+        valueType: 'flow'
+      }
+    ]
+  },
+  {
+    type: 'on_drop',
+    category: 'Event',
+    label: 'on Drop',
+    inputs: [
+      {
+        name: 'frame_id',
+        valueType: 'string',
+        defaultValue: ' '
       }
     ],
     outputs: [
@@ -118,13 +148,14 @@ export const newNode: NodeSpecJSON[] = [
     label: 'toggle value',
     inputs: [
       {
-        name: 'input',
+        name: ' ',
         valueType: 'flow',
         defaultValue: ''
       },
       {
-        name: 'variables',
-        valueType: 'string'
+        name: 'variable',
+        valueType: 'string',
+        defaultValue: ' '
       }
     ],
     outputs: [
@@ -135,6 +166,400 @@ export const newNode: NodeSpecJSON[] = [
       {
         name: 'output',
         valueType: 'string'
+      }
+    ]
+  },
+  {
+    type: 'increment',
+    category: 'Action',
+    label: 'Increment value',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow',
+        defaultValue: ''
+      },
+      {
+        name: 'variable',
+        valueType: 'string',
+        defaultValue: ' '
+      },
+      {
+        name: 'increment_by',
+        valueType: 'string',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'string'
+      }
+    ]
+  },
+  {
+    type: 'decrement',
+    category: 'Action',
+    label: 'Decrement value',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow',
+        defaultValue: ''
+      },
+      {
+        name: 'variable',
+        valueType: 'string',
+        defaultValue: ' '
+      },
+      {
+        name: 'decrement_by',
+        valueType: 'string',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'string'
+      }
+    ]
+  },
+  {
+    type: 'get_value_at_path',
+    category: 'Action',
+    label: 'get value at path',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow',
+        defaultValue: ''
+      },
+      {
+        name: 'object/array',
+        valueType: 'object',
+        defaultValue: ' '
+      },
+      {
+        name: 'path',
+        valueType: 'string',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'object'
+      }
+    ]
+  },
+  {
+    type: 'set_value_at_path',
+    category: 'Action',
+    label: 'set value at path',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow',
+        defaultValue: ''
+      },
+      {
+        name: 'object/array',
+        valueType: 'object',
+        defaultValue: ' '
+      },
+      {
+        name: 'path',
+        valueType: 'string',
+        defaultValue: ' '
+      },
+      {
+        name: 'value',
+        valueType: 'object',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'object'
+      }
+    ]
+  },
+  {
+    type: 'get_value_at_index',
+    category: 'Action',
+    label: 'get value at path',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow',
+        defaultValue: ''
+      },
+      {
+        name: 'array',
+        valueType: 'object',
+        defaultValue: ' '
+      },
+      {
+        name: 'index',
+        valueType: 'string',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'object'
+      }
+    ]
+  },
+  {
+    type: 'set_value_at_index',
+    category: 'Action',
+    label: 'set value at path',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow',
+        defaultValue: ''
+      },
+      {
+        name: 'array',
+        valueType: 'object',
+        defaultValue: ' '
+      },
+      {
+        name: 'index',
+        valueType: 'string',
+        defaultValue: ' '
+      },
+      {
+        name: 'value',
+        valueType: 'object',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'object'
+      }
+    ]
+  },
+  {
+    type: 'set_value',
+    category: 'Action',
+    label: 'set value',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow',
+        defaultValue: ''
+      },
+      {
+        name: 'object',
+        valueType: 'object',
+        defaultValue: ' '
+      },
+      {
+        name: 'value',
+        valueType: 'object',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'object'
+      }
+    ]
+  },
+  {
+    type: 'get_value_in_table',
+    category: 'Action',
+    label: 'get value in table',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'table',
+        valueType: 'object',
+        defaultValue: ' '
+      },
+      {
+        name: 'row',
+        valueType: 'string',
+        defaultValue: ' '
+      },
+      {
+        name: 'col',
+        valueType: 'string',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'object'
+      }
+    ]
+  },
+  {
+    type: 'set_value_in_table',
+    category: 'Action',
+    label: 'set value in table',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'table',
+        valueType: 'object',
+        defaultValue: ' '
+      },
+      {
+        name: 'row',
+        valueType: 'string',
+        defaultValue: ' '
+      },
+      {
+        name: 'col',
+        valueType: 'string',
+        defaultValue: ' '
+      },
+      {
+        name: 'value',
+        valueType: 'object',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'object'
+      }
+    ]
+  },
+  {
+    type: 'table_row_count',
+    category: 'Action',
+    label: 'get table row count',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'table',
+        valueType: 'object',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'string'
+      }
+    ]
+  },
+  {
+    type: 'table_col_count',
+    category: 'Action',
+    label: 'get table col count',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'table',
+        valueType: 'object',
+        defaultValue: ' '
+      },
+      {
+        name: 'row_index',
+        valueType: 'string',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'string'
+      }
+    ]
+  },
+  {
+    type: 'code_snippet',
+    category: 'Action',
+    label: 'code snippet',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'code',
+        valueType: 'string',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'object'
       }
     ]
   },
@@ -153,6 +578,24 @@ export const newNode: NodeSpecJSON[] = [
       {
         name: 'result',
         valueType: 'string'
+      }
+    ]
+  },
+  {
+    type: 'variable_object',
+    category: 'Variable',
+    label: 'Object Variable',
+    inputs: [
+      {
+        name: 'name',
+        valueType: 'object',
+        defaultValue: ''
+      }
+    ],
+    outputs: [
+      {
+        name: 'result',
+        valueType: 'object'
       }
     ]
   },
