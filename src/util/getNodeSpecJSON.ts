@@ -38,6 +38,52 @@ export const newNode: NodeSpecJSON[] = [
     ]
   },
   {
+    type: 'listen_event',
+    category: 'Action',
+    label: 'Listen event',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow',
+        defaultValue: ''
+      },
+      {
+        name: 'name',
+        valueType: 'string',
+        defaultValue: ''
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      }
+    ]
+  },
+  {
+    type: 'play_sound',
+    category: 'Action',
+    label: 'play sound',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow',
+        defaultValue: ''
+      },
+      {
+        name: 'name',
+        valueType: 'string',
+        defaultValue: ''
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      }
+    ]
+  },
+  {
     type: 'event',
     category: 'Event',
     label: 'Event',
@@ -576,6 +622,11 @@ export const newNode: NodeSpecJSON[] = [
         name: 'code',
         valueType: 'string',
         defaultValue: ' '
+      },
+      {
+        name: 'variables',
+        valueType: 'string',
+        defaultValue: ' '
       }
     ],
     outputs: [
@@ -603,6 +654,11 @@ export const newNode: NodeSpecJSON[] = [
         name: 'value',
         valueType: 'string',
         defaultValue: ''
+      },
+      {
+        name: 'defaultValue',
+        valueType: 'string',
+        defaultValue: ''
       }
     ],
     outputs: [
@@ -624,6 +680,11 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'value',
+        valueType: 'object',
+        defaultValue: ''
+      },
+      {
+        name: 'defaultValue',
         valueType: 'object',
         defaultValue: ''
       }
