@@ -44,6 +44,7 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
 
         // TODO: some of these are flow outputs, and should be saved differently.  -Ben, Oct 11, 2022
         behaveNode.parameters[edge.targetHandle] = {
+          ...behaveNode.parameters[edge.targetHandle],
           link: { nodeId: edge.source, socket: edge.sourceHandle }
         };
       });
