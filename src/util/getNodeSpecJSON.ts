@@ -440,6 +440,32 @@ export const newNode: NodeSpecJSON[] = [
     ]
   },
   {
+    type: 'scroll_to_frame',
+    category: 'Action',
+    label: 'get value in table',
+    inputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'frame_id',
+        valueType: 'string',
+        defaultValue: ' '
+      }
+    ],
+    outputs: [
+      {
+        name: ' ',
+        valueType: 'flow'
+      },
+      {
+        name: 'output',
+        valueType: 'string'
+      }
+    ]
+  },
+  {
     type: 'set_value_in_table',
     category: 'Action',
     label: 'set value in table',
@@ -572,6 +598,11 @@ export const newNode: NodeSpecJSON[] = [
         name: 'name',
         valueType: 'string',
         defaultValue: ''
+      },
+      {
+        name: 'value',
+        valueType: 'string',
+        defaultValue: ''
       }
     ],
     outputs: [
@@ -588,6 +619,11 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'name',
+        valueType: 'object',
+        defaultValue: ''
+      },
+      {
+        name: 'value',
         valueType: 'object',
         defaultValue: ''
       }
