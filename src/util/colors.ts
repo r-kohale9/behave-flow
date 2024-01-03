@@ -18,7 +18,8 @@ export const valueTypeColorMap: Record<string, string> = {
   integer: 'lime',
   boolean: 'red',
   string: 'purple',
-  object: 'yellow'
+  object: 'yellow',
+  textarea: 'blue'
 };
 
 export const categoryColorMap: Record<NodeSpecJSON['category'], string> = {

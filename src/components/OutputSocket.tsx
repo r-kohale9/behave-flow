@@ -25,7 +25,7 @@ export default function OutputSocket({
   const showName = isFlowSocket === false || name !== "flow";
 
   return (
-    <div className="flex grow items-center justify-end h-7">
+    <div className="flex grow items-center justify-end h-auto">
       {showName && <div className="capitalize">{name}</div>}
       {isFlowSocket && (
         <FontAwesomeIcon

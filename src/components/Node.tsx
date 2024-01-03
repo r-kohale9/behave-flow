@@ -5,6 +5,7 @@ import NodeContainer from "./NodeContainer";
 import OutputSocket from "./OutputSocket";
 import { useChangeNodeData } from "../hooks/useChangeNodeData";
 import { isHandleConnected } from "../util/isHandleConnected";
+import { useEffect, useState } from "react";
 
 type NodeProps = FlowNodeProps & {
   spec: NodeSpecJSON;
@@ -21,9 +22,30 @@ const getPairs = <T, U>(arr1: T[], arr2: U[]) => {
 };
 
 export const Node = ({ id, data, spec, selected }: NodeProps) => {
+  let count = 0
+  let first = null
+  const [pairs, setpairs] = useState([]);
+  useEffect(() => {
+    if (first !== data['variables']) {
+      count = 0
+    }
+    if (count === 0) {
+      if (spec.type == "code_snippet" && data['variables'] && !isNaN(data['variables']) && Number(data['variables']) > 0) {
+        spec.inputs = spec.inputs.filter(input => !input.name
+          .includes('variable') || input.name === "variables")
+        for (let i = 0; i < Number(data['variables']); i++) {
+          spec.inputs.push(
+            { name: `variable${i + 1}`, valueType: 'string', defaultValue: ' ' })
+        }
+      }
+      count++
+      first = data['variables']
+      setpairs(getPairs(spec.inputs, spec.outputs))
+    }
+  }, [data['variables']]);
   const edges = useEdges();
   const handleChange = useChangeNodeData(id);
-  const pairs = getPairs(spec.inputs, spec.outputs);
+
   return (
     <NodeContainer
       title={spec.label}
