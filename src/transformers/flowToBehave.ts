@@ -18,7 +18,11 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
 
     const behaveNode: NodeJSON = {
       id: node.id,
-      type: node.type
+      type: node.type,
+      metadata: {
+        positionX: String(node.position.x),
+        positionY: String(node.position.y)
+      }
     };
 
     Object.entries(node.data).forEach(([key, value]) => {
