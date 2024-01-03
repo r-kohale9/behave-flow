@@ -1,31 +1,24 @@
-import { GraphJSON, NodeJSON } from "behave-graph";
-import { Edge, Node } from "reactflow";
-import { getNodeSpecJSON } from "../util/getNodeSpecJSON";
+import { GraphJSON, NodeJSON } from 'behave-graph';
+import { Edge, Node } from 'reactflow';
+import { getNodeSpecJSON } from '../util/getNodeSpecJSON';
 
 const nodeSpecJSON = getNodeSpecJSON();
 
-const isNullish = (value: any): value is null | undefined =>
-  value === undefined || value === null;
+const isNullish = (value: any): value is null | undefined => value === undefined || value === null;
 
 export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
   const graph: GraphJSON = { nodes: [], variables: [], customEvents: [] };
 
-  nodes.forEach((node) => {
+  nodes.forEach(node => {
     if (node.type === undefined) return;
 
-    const nodeSpec = nodeSpecJSON.find(
-      (nodeSpec) => nodeSpec.type === node.type
-    );
+    const nodeSpec = nodeSpecJSON.find(nodeSpec => nodeSpec.type === node.type);
 
     if (nodeSpec === undefined) return;
 
     const behaveNode: NodeJSON = {
       id: node.id,
-      type: node.type,
-      metadata: {
-        positionX: String(node.position.x),
-        positionY: String(node.position.y),
-      },
+      type: node.type
     };
 
     Object.entries(node.data).forEach(([key, value]) => {
@@ -36,12 +29,10 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
     });
 
     edges
-      .filter((edge) => edge.target === node.id)
-      .forEach((edge) => {
-        const inputSpec = nodeSpec.inputs.find(
-          (input) => input.name === edge.targetHandle
-        );
-        if (inputSpec && inputSpec.valueType === "flow") {
+      .filter(edge => edge.target === node.id)
+      .forEach(edge => {
+        const inputSpec = nodeSpec.inputs.find(input => input.name === edge.targetHandle);
+        if (inputSpec && inputSpec.valueType === 'flow') {
           // skip flows
           return;
         }
@@ -53,17 +44,15 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
 
         // TODO: some of these are flow outputs, and should be saved differently.  -Ben, Oct 11, 2022
         behaveNode.parameters[edge.targetHandle] = {
-          link: { nodeId: edge.source, socket: edge.sourceHandle },
+          link: { nodeId: edge.source, socket: edge.sourceHandle }
         };
       });
 
     edges
-      .filter((edge) => edge.source === node.id)
-      .forEach((edge) => {
-        const outputSpec = nodeSpec.outputs.find(
-          (output) => output.name === edge.sourceHandle
-        );
-        if (outputSpec && outputSpec.valueType !== "flow") {
+      .filter(edge => edge.source === node.id)
+      .forEach(edge => {
+        const outputSpec = nodeSpec.outputs.find(output => output.name === edge.sourceHandle);
+        if (outputSpec && outputSpec.valueType !== 'flow') {
           return;
         }
         if (behaveNode.flows === undefined) {
@@ -75,7 +64,7 @@ export const flowToBehave = (nodes: Node[], edges: Edge[]): GraphJSON => {
         // TODO: some of these are flow outputs, and should be saved differently.  -Ben, Oct 11, 2022
         behaveNode.flows[edge.sourceHandle] = {
           nodeId: edge.target,
-          socket: edge.targetHandle,
+          socket: edge.targetHandle
         };
       });
 

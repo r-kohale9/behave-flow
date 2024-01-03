@@ -8,6 +8,7 @@ import { newNode } from "../util/getNodeSpecJSON";
 const specJSON = rawSpecJson as NodeSpecJSON[];
 
 const nodes = specJSON;
+nodes.push(...newNode)
 
 export type NodePickerFilters = {
   handleType: "source" | "target";
@@ -40,12 +41,10 @@ const NodePicker = ({
       return sockets.some((socket) => socket.valueType === filters?.valueType);
     });
   }
-
   filtered = filtered.filter((node) => {
     const term = search.toLowerCase();
     return node.type.toLowerCase().includes(term);
   });
-  filtered.push(...newNode)
   return (
     <div
       className="node-picker absolute z-10 text-sm text-white bg-gray-800 border rounded border-gray-500"
