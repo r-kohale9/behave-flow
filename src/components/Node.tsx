@@ -35,7 +35,7 @@ export const Node = ({ id, data, spec, selected }: NodeProps) => {
           .includes('variable') || input.name === "variables")
         for (let i = 0; i < Number(data['variables']); i++) {
           spec.inputs.push(
-            { name: `variable${i + 1}`, valueType: 'string', defaultValue: ' ' })
+            { name: `variable${i + 1}`, valueType: 'variable', defaultValue: ' ' })
         }
       }
       count++
