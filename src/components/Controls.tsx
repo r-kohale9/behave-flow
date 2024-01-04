@@ -229,7 +229,7 @@ const CustomControls = () => {
     }
   }
 
-  useOnPressKey('babasdf', () => {});
+  useOnPressKey('none', () => {}, true);
   return (
     <>
       <Controls>

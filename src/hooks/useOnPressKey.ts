@@ -43,6 +43,9 @@ export const useOnPressKey = (key: string, callback: (e: KeyboardEvent) => void,
 
     if (enableCopyPaste) {
       document.oncopy = async function (e) {
+        const activeElement = document.activeElement;
+        const inputs = ['input', 'select', 'button', 'textarea'];
+        if (activeElement && inputs.indexOf(activeElement.tagName.toLowerCase()) !== -1) return;
         // get nodes
         let selectedNodes = reactFlowInstance?.getNodes()?.filter(node => node.selected);
         // get edges
@@ -65,10 +68,15 @@ export const useOnPressKey = (key: string, callback: (e: KeyboardEvent) => void,
       };
 
       document.onpaste = function (e) {
-        const text = JSON.parse(e.clipboardData.getData('text') || '{}');
+        let text = { selectedNodes: [], selectedEdges: [] };
+        try {
+          text = JSON.parse(e.clipboardData.getData('text') || '{}');
+        } catch {
+          return;
+        }
         if (!text) return false;
         const { selectedNodes, selectedEdges } = text;
-        if (!selectedNodes || !selectedEdges) return false;
+        if (!selectedNodes?.length && !selectedEdges?.length) return false;
         // duplicate these nodes
         const idMap = {};
         let duplicateNodes = selectedNodes.map(node => {
