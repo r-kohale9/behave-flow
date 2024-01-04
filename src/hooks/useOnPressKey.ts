@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useReactFlow } from 'reactflow';
 
-export const useOnPressKey = (key: string, callback: (e: KeyboardEvent) => void) => {
+export const useOnPressKey = (key: string, callback: (e: KeyboardEvent) => void, enableCopyPaste = false) => {
   const reactFlowInstance = useReactFlow();
   let keyMap = {};
   useEffect(() => {
@@ -41,55 +41,57 @@ export const useOnPressKey = (key: string, callback: (e: KeyboardEvent) => void)
       });
     };
 
-    document.oncopy = async function (e) {
-      // get nodes
-      let selectedNodes = reactFlowInstance?.getNodes()?.filter(node => node.selected);
-      // get edges
-      let selectedEdges = reactFlowInstance?.getEdges()?.filter(edge => edge.selected);
-      // Check if there are nodes selected
-      if (selectedNodes?.length) {
-        // make original nodes deselected
-        selectedNodes.forEach(node => {
-          node.selected = false;
-        });
-        // make original edges deselected
-        selectedEdges.forEach(edge => {
-          edge.selected = false;
-        });
-        // set new nodes and edges p
-        const data = { selectedNodes, selectedEdges };
-        navigator.clipboard.writeText(JSON.stringify(data));
-        setFlowData(selectedNodes, selectedEdges);
-      }
-    };
+    if (enableCopyPaste) {
+      document.oncopy = async function (e) {
+        // get nodes
+        let selectedNodes = reactFlowInstance?.getNodes()?.filter(node => node.selected);
+        // get edges
+        let selectedEdges = reactFlowInstance?.getEdges()?.filter(edge => edge.selected);
+        // Check if there are nodes selected
+        if (selectedNodes?.length) {
+          // make original nodes deselected
+          selectedNodes.forEach(node => {
+            node.selected = false;
+          });
+          // make original edges deselected
+          selectedEdges.forEach(edge => {
+            edge.selected = false;
+          });
+          // set new nodes and edges p
+          const data = { selectedNodes, selectedEdges };
+          navigator.clipboard.writeText(JSON.stringify(data));
+          setFlowData(selectedNodes, selectedEdges);
+        }
+      };
 
-    document.onpaste = function (e) {
-      const text = JSON.parse(e.clipboardData.getData('text') || '{}');
-      if (!text) return false;
-      const { selectedNodes, selectedEdges } = text;
-      if (!selectedNodes || !selectedEdges) return false;
-      // duplicate these nodes
-      const idMap = {};
-      let duplicateNodes = selectedNodes.map(node => {
-        // append dup id
-        node = JSON.parse(JSON.stringify(node));
-        idMap[node.id] = uuid();
-        node.id = idMap[node.id];
-        node.selected = true;
-        return node;
-      });
-      // duplicate the edges
-      let duplicateEdges = selectedEdges.map(edge => {
-        // append dup id
-        edge = JSON.parse(JSON.stringify(edge));
-        edge.source = idMap[edge.source];
-        edge.target = idMap[edge.target];
-        edge.id = uuid();
-        edge.selected = true;
-        return edge;
-      });
-      setFlowData(duplicateNodes, duplicateEdges);
-    };
+      document.onpaste = function (e) {
+        const text = JSON.parse(e.clipboardData.getData('text') || '{}');
+        if (!text) return false;
+        const { selectedNodes, selectedEdges } = text;
+        if (!selectedNodes || !selectedEdges) return false;
+        // duplicate these nodes
+        const idMap = {};
+        let duplicateNodes = selectedNodes.map(node => {
+          // append dup id
+          node = JSON.parse(JSON.stringify(node));
+          idMap[node.id] = uuid();
+          node.id = idMap[node.id];
+          node.selected = true;
+          return node;
+        });
+        // duplicate the edges
+        let duplicateEdges = selectedEdges.map(edge => {
+          // append dup id
+          edge = JSON.parse(JSON.stringify(edge));
+          edge.source = idMap[edge.source];
+          edge.target = idMap[edge.target];
+          edge.id = uuid();
+          edge.selected = true;
+          return edge;
+        });
+        setFlowData(duplicateNodes, duplicateEdges);
+      };
+    }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);

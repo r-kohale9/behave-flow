@@ -29,6 +29,7 @@ import { SaveModal } from './SaveModal';
 import { flowToBehave } from '../transformers/flowToBehave';
 import { useReactFlow, Controls, ControlButton, useNodes } from 'reactflow';
 import { sleep } from '../util/sleep';
+import { useOnPressKey } from '../hooks/useOnPressKey';
 
 const CustomControls = () => {
   const [loadModalOpen, setLoadModalOpen] = useState(false);
@@ -228,6 +229,7 @@ const CustomControls = () => {
     }
   }
 
+  useOnPressKey('babasdf', () => {});
   return (
     <>
       <Controls>
