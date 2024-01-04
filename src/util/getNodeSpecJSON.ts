@@ -1,4 +1,12 @@
-import { NodeSpecJSON, registerCoreProfile, registerSceneProfile, Registry, writeNodeSpecsToJSON } from 'behave-graph';
+import {
+  InputSocketSpecJSON,
+  NodeSpecJSON,
+  OutputSocketSpecJSON,
+  registerCoreProfile,
+  registerSceneProfile,
+  Registry,
+  writeNodeSpecsToJSON
+} from 'behave-graph';
 
 let nodeSpecJSON: NodeSpecJSON[] | undefined = undefined;
 
@@ -13,7 +21,19 @@ export const getNodeSpecJSON = (): NodeSpecJSON[] => {
   return nodeSpecJSON;
 };
 
-export const newNode: NodeSpecJSON[] = [
+interface InputSocketSpecJSONNew extends InputSocketSpecJSON {
+  type?: string;
+}
+
+interface OutputSocketSpecJSONNew extends OutputSocketSpecJSON {
+  type?: string;
+}
+interface NodeSpecJSONNew extends NodeSpecJSON {
+  inputs: InputSocketSpecJSONNew[];
+  outputs: OutputSocketSpecJSONNew[];
+}
+
+export const newNode: NodeSpecJSONNew[] = [
   {
     type: 'publish_event',
     category: 'Action',
@@ -26,7 +46,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'name',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       }
     ],
@@ -49,7 +70,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'name',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       }
     ],
@@ -72,7 +94,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'name',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       }
     ],
@@ -90,12 +113,14 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'name',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       },
       {
         name: 'type',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       },
       {
@@ -123,7 +148,8 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'frame_id',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -141,7 +167,8 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'frame_id',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -159,7 +186,8 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'frame_id',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -177,7 +205,8 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'frame_id',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -200,7 +229,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'variable',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -211,7 +241,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'string'
+        valueType: 'variable',
+        type: 'string'
       }
     ]
   },
@@ -227,12 +258,14 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'variable',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       },
       {
         name: 'increment_by',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -243,7 +276,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'string'
+        valueType: 'variable',
+        type: 'string'
       }
     ]
   },
@@ -259,12 +293,14 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'variable',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       },
       {
         name: 'decrement_by',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -275,7 +311,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'string'
+        valueType: 'variable',
+        type: 'string'
       }
     ]
   },
@@ -291,12 +328,14 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'object/array',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       },
       {
         name: 'path',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -307,7 +346,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'object'
+        valueType: 'variable',
+        type: 'object'
       }
     ]
   },
@@ -323,17 +363,20 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'object/array',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       },
       {
         name: 'path',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       },
       {
         name: 'value',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       }
     ],
@@ -344,7 +387,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'object'
+        valueType: 'variable',
+        type: 'object'
       }
     ]
   },
@@ -360,12 +404,14 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'array',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       },
       {
         name: 'index',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -376,7 +422,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'object'
+        valueType: 'variable',
+        type: 'object'
       }
     ]
   },
@@ -392,17 +439,20 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'array',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       },
       {
         name: 'index',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       },
       {
         name: 'value',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       }
     ],
@@ -413,7 +463,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'object'
+        valueType: 'variable',
+        type: 'object'
       }
     ]
   },
@@ -429,12 +480,14 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'object',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       },
       {
         name: 'value',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       }
     ],
@@ -445,7 +498,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'object'
+        valueType: 'variable',
+        type: 'object'
       }
     ]
   },
@@ -460,17 +514,20 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'table',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       },
       {
         name: 'row',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       },
       {
         name: 'col',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -481,7 +538,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'object'
+        valueType: 'variable',
+        type: 'object'
       }
     ]
   },
@@ -496,7 +554,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'frame_id',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -507,7 +566,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'string'
+        valueType: 'variable',
+        type: 'string'
       }
     ]
   },
@@ -522,22 +582,26 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'table',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       },
       {
         name: 'row',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       },
       {
         name: 'col',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       },
       {
         name: 'value',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       }
     ],
@@ -548,7 +612,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'object'
+        valueType: 'variable',
+        type: 'object'
       }
     ]
   },
@@ -563,7 +628,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'table',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       }
     ],
@@ -574,7 +640,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'string'
+        valueType: 'variable',
+        type: 'string'
       }
     ]
   },
@@ -589,12 +656,14 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'table',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ' '
       },
       {
         name: 'row_index',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -605,7 +674,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'string'
+        valueType: 'variable',
+        type: 'string'
       }
     ]
   },
@@ -620,12 +690,14 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'code',
-        valueType: 'textarea',
+        valueType: 'variable',
+        type: 'textarea',
         defaultValue: ' '
       },
       {
         name: 'variables',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ' '
       }
     ],
@@ -636,7 +708,8 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'output',
-        valueType: 'object'
+        valueType: 'variable',
+        type: 'object'
       }
     ]
   },
@@ -647,24 +720,28 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'name',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       },
       {
         name: 'value',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       },
       {
         name: 'defaultValue',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       }
     ],
     outputs: [
       {
         name: 'result',
-        valueType: 'string'
+        valueType: 'variable',
+        type: 'string'
       }
     ]
   },
@@ -675,24 +752,28 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'name',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ''
       },
       {
         name: 'value',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ''
       },
       {
         name: 'defaultValue',
-        valueType: 'object',
+        valueType: 'variable',
+        type: 'object',
         defaultValue: ''
       }
     ],
     outputs: [
       {
         name: 'result',
-        valueType: 'object'
+        valueType: 'variable',
+        type: 'object'
       }
     ]
   },
@@ -703,24 +784,28 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'name',
-        valueType: 'textarea',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       },
       {
         name: 'value',
-        valueType: 'textarea',
+        valueType: 'variable',
+        type: 'textarea',
         defaultValue: ''
       },
       {
         name: 'defaultValue',
-        valueType: 'textarea',
+        valueType: 'variable',
+        type: 'textarea',
         defaultValue: ''
       }
     ],
     outputs: [
       {
         name: 'result',
-        valueType: 'textarea'
+        valueType: 'variable',
+        type: 'object'
       }
     ]
   },
@@ -731,7 +816,8 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'name',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       }
     ],
@@ -749,12 +835,14 @@ export const newNode: NodeSpecJSON[] = [
     inputs: [
       {
         name: 'name',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       },
       {
         name: 'compute function',
-        valueType: 'string',
+        valueType: 'variable',
+        type: 'string',
         defaultValue: ''
       },
       {

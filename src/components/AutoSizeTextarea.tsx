@@ -10,6 +10,7 @@ import {
 
 export type AutoSizeInputProps = HTMLProps<HTMLTextAreaElement> & {
   minWidth?: number;
+  maxWidth?: number;
 };
 
 const baseStyles: CSSProperties = {
@@ -24,6 +25,7 @@ const baseStyles: CSSProperties = {
 
 export const AutoSizeTextarea: FC<AutoSizeInputProps> = ({
   minWidth = 60,
+  maxWidth = 200,
   ...props
 }) => {
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
@@ -50,6 +52,7 @@ export const AutoSizeTextarea: FC<AutoSizeInputProps> = ({
 
     const width = measureRef.current.clientWidth;
     inputRef.current.style.width = Math.max(minWidth, width) + "px";
+    inputRef.current.style.maxWidth = maxWidth + "px";
   }, [props.value, minWidth, styles]);
 
   return (
