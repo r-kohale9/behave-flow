@@ -6,6 +6,7 @@ import { colors, valueTypeColorMap } from "../util/colors";
 import { InputSocketSpecJSON } from "behave-graph";
 import { isValidConnection } from "../util/isValidConnection";
 import { AutoSizeInput } from "./AutoSizeInput";
+import { AutoSizeTextarea } from "./AutoSizeTextarea";
 
 export type InputSocketProps = {
   connected: boolean;
@@ -33,7 +34,7 @@ export default function InputSocket({
   const showName = isFlowSocket === false || name !== "flow";
 
   return (
-    <div className="flex grow items-center justify-start h-7">
+    <div className="flex grow items-center justify-start h-auto">
       {isFlowSocket && (
         <FontAwesomeIcon icon={faCaretRight} color="#ffffff" size="lg" />
       )}
@@ -43,6 +44,14 @@ export default function InputSocket({
           {valueType === "string" && (
             <AutoSizeInput
               type="text"
+              className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
+              value={String(value) ?? String(defaultValue) ?? ""}
+              onChange={(e) => onChange(name, e.currentTarget.value)}
+            />
+          )}
+          {valueType === "textarea" && (
+            <AutoSizeTextarea
+              type="textarea"
               className=" bg-gray-600 disabled:bg-gray-700 py-1 px-2 nodrag"
               value={String(value) ?? String(defaultValue) ?? ""}
               onChange={(e) => onChange(name, e.currentTarget.value)}

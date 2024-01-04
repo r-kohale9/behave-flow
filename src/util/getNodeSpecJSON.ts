@@ -620,7 +620,7 @@ export const newNode: NodeSpecJSON[] = [
       },
       {
         name: 'code',
-        valueType: 'string',
+        valueType: 'textarea',
         defaultValue: ' '
       },
       {
@@ -693,6 +693,34 @@ export const newNode: NodeSpecJSON[] = [
       {
         name: 'result',
         valueType: 'object'
+      }
+    ]
+  },
+  {
+    type: 'variable_textarea',
+    category: 'Variable',
+    label: 'Textarea Variable',
+    inputs: [
+      {
+        name: 'name',
+        valueType: 'textarea',
+        defaultValue: ''
+      },
+      {
+        name: 'value',
+        valueType: 'textarea',
+        defaultValue: ''
+      },
+      {
+        name: 'defaultValue',
+        valueType: 'textarea',
+        defaultValue: ''
+      }
+    ],
+    outputs: [
+      {
+        name: 'result',
+        valueType: 'textarea'
       }
     ]
   },
