@@ -270,7 +270,7 @@ const CustomControls = () => {
         )}
       </Controls>
       <LoadModal open={loadModalOpen} onClose={() => setLoadModalOpen(false)} />
-      <SaveModal open={saveModalOpen} onClose={() => setSaveModalOpen(false)} />
+      {saveModalOpen && <SaveModal open={saveModalOpen} onClose={() => setSaveModalOpen(false)} />}
       <HelpModal open={helpModalOpen} onClose={() => setHelpModalOpen(false)} />
       <ClearModal open={clearModalOpen} onClose={() => setClearModalOpen(false)} />
     </>
